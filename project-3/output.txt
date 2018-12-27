@@ -1,42 +1,42 @@
 Query of First Question:
 
-news=> create view qmostartview as select articles.title, subq.views from ( 
-select subq1.slug, count(*) as views from ( select articles.slug, log.path from
-articles cross join log where log.path like ('%'|| articles.slug ||'%')) as subq1 
-group by subq1.slug) as subq cross join articles where
-articles.slug = subq.slug order by subq.views desc limit 3;
+news=> create view qmostartview as select articles.title, subq.views
+from ( select subq1.slug, count(*) as views from (
+select articles.slug, log.path from articles cross join log
+where log.path like ('%'|| articles.slug ||'%')
+and status = '200 OK') as subq1 group by subq1.slug) as subq
+cross join articles where articles.slug = subq.slug 
+order by subq.views desc limit 3;
 CREATE VIEW
 
 news=> select * from qmostartview;
               title               | views
 ----------------------------------+--------
- Candidate is jerk, alleges rival | 342102
- Bears love berries, alleges bear | 256365
- Bad things gone, say good people | 171762
+ Candidate is jerk, alleges rival | 338647
+ Bears love berries, alleges bear | 253801
+ Bad things gone, say good people | 170098
 (3 rows)
 ___________________________________________________________________________________
 
 Query of second Question:
 
-news=> create view qpopaut as select authors.name, subq.views from ( select
-subq1.slug, count(*) as views from ( select articles.slug, log.path from 
-articles cross join log where log.path like ('%'|| articles.slug ||'%'))
-as subq1 group by subq1.slug) as subq cross join articles, authors where 
-articles.author = authors.id and articles.slug = subq.slug order by subq.views desc;
+news=> create view qpopaut as select authors.name,  sum(subq.views) as view from (
+select subq1.slug, count(*) as views from ( select articles.slug,
+log.path from articles cross join log where log.path like
+('%'|| articles.slug ||'%') and status = '200 OK') as subq1 group by subq1.slug) as
+subq cross join articles, authors where articles.author =
+authors.id and articles.slug = subq.slug group by authors.id order by view desc;
 CREATE VIEW
 
 news=> select * from qpopaut;
           name          | views
 ------------------------+--------
- Rudolf von Treppenwitz | 342102
- Ursula La Multa        | 256365
- Anonymous Contributor  | 171762
- Ursula La Multa        |  85775
- Rudolf von Treppenwitz |  85679
- Ursula La Multa        |  85392
- Markoff Chaney         |  85387
- Ursula La Multa        |  85273
-(8 rows)
+ Ursula La Multa        | 507594
+ Rudolf von Treppenwitz | 423457
+ Anonymous Contributor  | 170098
+ Markoff Chaney         |  84557
+
+(4 rows)
 _____________________________________________________________________________________
 
 Query of third Question:
@@ -56,9 +56,6 @@ news=> select * from qdayerror;
 -----------+------------
  17-7-2016 |          2
 (1 row)
-
-
-
 
 
 
