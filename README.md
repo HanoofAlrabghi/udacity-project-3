@@ -14,11 +14,12 @@ to vagrant directory and run 'vagrant up' to installations linux.
 3. Put 'newsdata.sql' this file into the vagrant directory.
 4. load the data into your vagrant directory using: 'psql -d news -f newsdata.sql' command. 
 what this command means:
-psql — the PostgreSQL command line program.
--d news — connect to the database named news which has been set up for you.
--f newsdata.sql — run the SQL statements in the file newsdata.sql.
+1. psql — the PostgreSQL command line program.
+2. -d news — connect to the database named news which has been set up for you.
+3. -f newsdata.sql — run the SQL statements in the file newsdata.sql.
 Running this command will connect to your installed database server and execute the SQL commands
 in the downloaded file, creating tables and populating them with data. 
+
 5. To connect to your DB using: psql -d news (news is your database name).
 6. To exploration the data use:  '\dt' dispaly tables and '\d table' shows the database schema for that particular table.
 and select statements to display table data. 
