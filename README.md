@@ -12,11 +12,11 @@ How to install linux in the virtualbox using vagrant:
 to vagrant directory and run 'vagrant up' to installations linux.
 2. Then run 'vagrant ssh' to log into linux.
 3. Put 'newsdata.sql' this file into the vagrant directory.
-4. load the data into your vagrant directory using: 'psql -d news -f newsdata.sql' command 
+4. load the data into your vagrant directory using: 'psql -d news -f newsdata.sql' command. 
 what this command means:
-psql — the PostgreSQL command line program
--d news — connect to the database named news which has been set up for you
--f newsdata.sql — run the SQL statements in the file newsdata.sql
+psql — the PostgreSQL command line program.
+-d news — connect to the database named news which has been set up for you.
+-f newsdata.sql — run the SQL statements in the file newsdata.sql.
 Running this command will connect to your installed database server and execute the SQL commands
 in the downloaded file, creating tables and populating them with data. 
 5. To connect to your DB using: psql -d news (news is your database name).
